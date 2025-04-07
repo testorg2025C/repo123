@@ -13,6 +13,6 @@ jobs:
       - name: Cancel if PR author tries to merge their own PR
         run: |
           echo "You cannot merge your own pull request. Ask someone else to review and approve your PR."; 
-          echo "github.actor" github.actor;
-          echo "github.event.pull_request.user.login" github.event.pull_request.user.login;
+          echo "🔹 PR Author: ${{ github.event.pull_request.user.login }}";
+          echo "🔸 Action Triggered By: ${{ github.actor }}";
           exit 1
