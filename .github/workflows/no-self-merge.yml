@@ -1,6 +1,6 @@
 name: Prevent Self-Merge
 
-on: master
+on: main
 
 jobs:
   no-self-merge:
