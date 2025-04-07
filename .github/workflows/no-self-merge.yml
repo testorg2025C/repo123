@@ -9,5 +9,5 @@ jobs:
     steps:
       - name: Cancel if PR author tries to merge their own PR
         run: |
-          echo "You cannot merge your own pull request. Ask someone else to review and approve."; 
+          echo "You cannot merge your own pull request. Ask someone else to review and approve your PR."; 
           exit 1
