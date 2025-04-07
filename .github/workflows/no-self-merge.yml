@@ -1,0 +1,13 @@
+name: Prevent Self-Merge
+
+on: pull_request_target
+
+jobs:
+  no-self-merge:
+    if: github.event.pull_request.user.login == github.actor
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel if PR author tries to merge their own PR
+        run: |
+          echo "You cannot merge your own pull request. Ask someone else to review and approve."; 
+          exit 1
