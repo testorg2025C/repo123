@@ -1,0 +1,7 @@
+- name: Check commit author email
+  run: |
+    git log --format='%ae' ${{ github.event.before }}..${{ github.sha }} | while read email; do
+      if [[ ! "$email" =~ @yourdomain.com$ ]]; then
+        echo "Unauthorized commit author: $email"; exit 1;
+      fi
+    done
