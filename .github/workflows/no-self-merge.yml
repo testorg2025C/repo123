@@ -1,6 +1,9 @@
 name: Prevent Self-Merge
 
-on: main
+on:
+  pull_request_target:
+    branches:
+      - main  # 👈 this is where you specify the branch
 
 jobs:
   no-self-merge:
