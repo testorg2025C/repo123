@@ -1,7 +1,20 @@
-name: Check commit author email
-  run: |
-    git log --format='%ae' ${{ github.event.before }}..${{ github.sha }} | while read email; do
-      if [[ ! "$email" =~ @yourdomain.com$ ]]; then
-        echo "Unauthorized commit author: $email"; exit 1;
-      fi
-    done
+name: Require Valid Commit Author
+
+on: push
+
+jobs:
+  check-author-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check commit author email domain
+        run: |
+          echo "Checking commits between ${{ github.event.before }} and ${{ github.sha }}"
+          git fetch origin main --depth=1
+          for email in $(git log --format='%ae' ${{ github.event.before }}..${{ github.sha }}); do
+            echo "Checking: $email"
+            if [[ ! "$email" =~ @yourcompany.com$ ]]; then
+              echo "❌ Invalid author email: $email"
+              exit 1
+            fi
+          done
+          echo "✅ All commit authors are valid."
